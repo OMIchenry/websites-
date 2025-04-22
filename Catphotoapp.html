@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMI_c's Purradise | Adorable Cat Adoption</title>
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Nunito:wght@400;700&display=swap">
+    
+    <!-- CSS Styles -->
+    <style>
+        /* CSS Variables for Easy Color Management */
+        :root {
+            --pastel-pink: #ffb6c1;   /* Soft pink */
+            --lavender: #e6e6fa;      /* Light purple */
+            --mint: #b5ead7;          /* Mint green */
+            --peach: #ffdac1;         /* Peach */
+            --skyblue: #c7ceea;       /* Light blue */
+            --buttercup: #fdfd96;    /* Yellow */
+            --lilac: #d8bfd8;        /* Lilac purple */
+            --coral: #ffb3ba;         /* Coral pink */
+            --cat-nose: #ffb8c6;      /* Cat nose pink */
+        }
+        
+        /* Base Body Styles */
+        body {
+            font-family: 'Baloo 2', 'Nunito', cursive; /* Playful font stack */
+            line-height: 1.8;                         /* Better readability */
+            color: #5a5a5a;                            /* Dark gray text */
+            max-width: 1200px;                         /* Limit content width */
+            margin: 0 auto;                            /* Center content */
+            padding: 20px;
+            background-color: #fff9fb;                 /* Very light pink */
+            /* Background pattern with layered dots */
+            background-image: 
+                radial-gradient(var(--lavender) 1px, transparent 1px),
+                radial-gradient(var(--mint) 1px, transparent 1px),
+                radial-gradient(var(--buttercup) 1px, transparent 1px);
+            background-size: 50px 50px;               /* Dot grid size */
+            background-position: 0 0, 16px 16px, 32px 32px; /* Offset dots */
+            animation: float 15s infinite ease-in-out; /* Subtle bg animation */
+        }
+
+        /* Background animation (floating effect) */
+        @keyframes float {
+            0%, 100% { background-position: 0 0, 16px 16px, 32px 32px; }
+            50% { background-position: 0 15px, 16px 31px, 32px 47px; }
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            /* Gradient background */
+            background: linear-gradient(45deg, var(--pastel-pink), var(--lilac), var(--mint), var(--buttercup));
+            padding: 30px;
+            border-radius: 30px;                      /* Rounded corners */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Soft shadow */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative cat-face shapes in header background */
+        header::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            /* SVG cat-face pattern */
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="rgba(255,255,255,0.2)" d="M30,10 Q50,5 70,10 Q95,15 90,40 Q85,70 50,90 Q15,70 10,40 Q5,15 30,10"/></svg>') repeat;
+            opacity: 0.3;
+            z-index: -1;
+            animation: float 20s infinite linear;
+        }
+        
+        /* Main Title */
+        h1 {
+            color: white;
+            font-size: 4em;
+            /* Layered text shadow for depth */
+            text-shadow: 4px 4px 0 var(--coral), 
+                         8px 8px 0 rgba(255,255,255,0.3);
+            margin: 10px 0;
+            font-weight: 800;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Animated paw after title */
+        h1::after {
+            content: "🐾";
+            position: absolute;
+            right: -30px;
+            top: -20px;
+            font-size: 0.6em;
+            transform: rotate(20deg);
+            animation: bounce 2s infinite; /* Bouncing animation */
+        }
+
+        /* Paw bounce animation */
+        @keyframes bounce {
+            0%, 100% { transform: rotate(20deg) translateY(0); }
+            50% { transform: rotate(20deg) translateY(-10px); }
+        }
+        
+        /* Cat Gallery Grid Layout */
+        .cat-gallery {
+            display: grid;
+            /* Responsive grid - min 280px, max equal columns */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;                      /* Space between cards */
+            margin: 50px 0;
+        }
+        
+        /* Individual Cat Card */
+        .cat-card {
+            background: white;
+            border-radius: 25px;            /* Rounded corners */
+            overflow: hidden;               /* Contain content */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth hover */
+            position: relative;
+            border: 3px solid white;        /* White border (changes on hover) */
+        }
+        
+        /* Card hover effects */
+        .cat-card:hover {
+            transform: translateY(-15px) scale(1.03); /* Lift up */
+            box-shadow: 0 20px 40px rgba(255,154,162,0.4);
+            border-color: var(--cat-nose);   /* Change to pink */
+        }
+        
+        /* Cat image styling */
+        .cat-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;               /* Crop to fit */
+            border-bottom: 6px solid var(--peach);
+            transition: all 0.3s;
+        }
+
+        /* Change border color on hover */
+        .cat-card:hover img {
+            border-bottom-color: var(--coral);
+        }
+        
+        /* Cat info section */
+        .cat-info {
+            padding: 25px;
+            text-align: center;
+            background: linear-gradient(to bottom, white, #fff9fc); /* Fade to light pink */
+        }
+        
+        /* Breed tag styling */
+        .cat-breed {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--skyblue), var(--lilac));
+            color: white;
+            padding: 6px 18px;
+            border-radius: 30px;             /* Pill shape */
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+
+        /* Cat name styling */
+        .cat-card h3 {
+            font-size: 1.5em;
+            margin: 10px 0;
+            color: #6d4c67;                 /* Dark purple */
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Heart icon that appears on hover */
+        .cat-card h3::before {
+            content: "❤️";
+            position: absolute;
+            left: -30px;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .cat-card:hover h3::before {
+            opacity: 1;
+            left: -25px;
+        }
+
+        /* Cat description */
+        .cat-card p {
+            font-size: 1.1em;
+            color: #7a7a7a;
+        }
+
+        /* Adoption Section */
+        .adoption-section {
+            background: linear-gradient(135deg, var(--peach), var(--buttercup));
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255,179,186,0.3);
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative cat shapes in background */
+        .adoption-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="rgba(255,255,255,0.3)" d="M30,20 C40,0 60,0 70,20 C80,40 60,60 50,80 C40,60 20,40 30,20 Z"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        /* Content layout */
+        .adoption-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Image styling */
+        .adoption-content img {
+            border-radius: 20px;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 5px solid white;
+            transform: rotate(-5deg);      /* Slight tilt */
+            transition: all 0.3s;
+        }
+
+        /* Image hover effect */
+        .adoption-content img:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        /* Benefits list */
+        .benefits-list {
+            flex: 1;
+        }
+
+        /* Individual benefit items */
+        .benefits-list p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        /* Emoji circles before benefits */
+        .benefits-list p::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        /* Different emojis for each benefit */
+        .benefits-list p:nth-child(1)::before { content: "🐾"; }
+        .benefits-list p:nth-child(2)::before { content: "🏥"; }
+        .benefits-list p:nth-child(3)::before { content: "💕"; }
+
+        /* Adoption button */
+        .adopt-button {
+            background: linear-gradient(45deg, var(--pastel-pink), var(--coral));
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255,182,193,0.4);
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Button hover effect */
+        .adopt-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,182,193,0.6);
+        }
+
+        /* Arrow after button */
+        .adopt-button::after {
+            content: "→";
+            transition: all 0.3s;
+        }
+
+        .adopt-button:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            color: #888;
+            padding: 30px;
+            position: relative;
+        }
+
+        /* Decorative line above footer */
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--pastel-pink), transparent);
+        }
+
+        footer p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        /* Link styling */
+        footer a {
+            color: var(--pastel-pink);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        /* Animated underline */
+        footer a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--coral);
+            transition: width 0.3s;
+        }
+
+        footer a:hover::after {
+            width: 100%;
+        }
+
+        /* Floating cats animation */
+        .floating-cat {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            pointer-events: none;           /* Don't interfere with clicks */
+            z-index: 100;
+            animation: float-around 15s infinite linear;
+            opacity: 0.7;
+        }
+
+        /* Floating animation path */
+        @keyframes float-around {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, 50px) rotate(90deg); }
+            50% { transform: translate(50px, 100px) rotate(180deg); }
+            75% { transform: translate(-50px, 50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .adoption-content {
+                flex-direction: column;
+            }
+            
+            .adoption-content img {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+            }
+            
+            .cat-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating cat emojis (decorative) -->
+    <div class="floating-cat" style="top: 10%; left: 5%; animation-delay: 0s;">🐱</div>
+    <div class="floating-cat" style="top: 20%; right: 8%; animation-delay: 3s;">😸</div>
+    <div class="floating-cat" style="bottom: 15%; left: 10%; animation-delay: 6s;">😻</div>
+    <div class="floating-cat" style="bottom: 25%; right: 5%; animation-delay: 9s;">🐾</div>
+
+    <!-- Main Header -->
+    <header>
+        <h1>OMI_c's Purradise</h1>
+        <p style="font-size: 1.3em; color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
+            Where every cat finds their fur-ever home! 🎀
+        </p>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Cat Gallery Section -->
+        <section>
+            <h2 style="font-size: 2.2em; color: #6d4c67; text-align: center; margin-bottom: 20px; position: relative;">
+                <span style="background: linear-gradient(45deg, var(--pastel-pink), var(--lilac)); color: white; padding: 0 15px; border-radius: 20px; display: inline-block;">
+                    Meet Our Fluffy Stars 🌟
+                </span>
+            </h2>
+            <p style="text-align: center; font-size: 1.2em; max-width: 800px; margin: 0 auto 30px; color: #7a7a7a;">
+                Each of these adorable purr-balls has been rescued and is looking for a loving home. 
+                Could you be their purr-fect match?
+            </p>
+            
+            <!-- Cat Cards Grid -->
+            <div class="cat-gallery">
+                <!-- Cat 1 -->
+                <div class="cat-card">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Green-eyed tabby cat">
+                    <div class="cat-info">
+                        <span class="cat-breed">Tabby</span>
+                        <h3>Oliver</h3>
+                        <p>Professional chin scratch enthusiast & sunbathing expert ☀️</p>
+                    </div>
+                </div>
+                
+                <!-- Cat 2 -->
+                <div class="cat-card">
+                    <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Grumpy-faced Persian cat">
+                    <div class="cat-info">
+                        <span class="cat-breed">Persian</span>
+                        <h3>Muffin</h3>
+                        <p>Royal attitude with a heart of marshmallow 👑</p>
+                    </div>
+                </div>
+                
+                <!-- Cat 3 -->
+                <div class="cat-card">
+                    <img src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Black and white tuxedo cat">
+                    <div class="cat-info">
+                        <span class="cat-breed">Tuxedo</span>
+                        <h3>Oreo</h3>
+                        <p>Always dressed to impress at the fanciest parties 🎩</p>
+                    </div>
+                </div>
+                
+                <!-- Cat 4 -->
+                <div class="cat-card">
+                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Orange tabby kitten">
+                    <div class="cat-info">
+                        <span class="cat-breed">Orange Tabby</span>
+                        <h3>Pumpkin</h3>
+                        <p>Endless energy wrapped in orange fluff 🧡</p>
+                    </div>
+                </div>
+
+                <!-- Cat 5 -->
+                <div class="cat-card">
+                    <img src="https://images.unsplash.com/photo-1593483316242-efb5420596ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Gray Scottish Fold cat">
+                    <div class="cat-info">
+                        <span class="cat-breed">Scottish Fold</span>
+                        <h3>Dumpling</h3>
+                        <p>Ears folded, heart wide open 🥟</p>
+                    </div>
+                </div>
+
+                <!-- Cat 6 -->
+                <div class="cat-card">
+                    <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Siamese cat">
+                    <div class="cat-info">
+                        <span class="cat-breed">Siamese</span>
+                        <h3>Mochi</h3>
+                        <p>Talkative companion with ocean-blue eyes 💙</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Adoption Benefits Section -->
+        <section class="adoption-section">
+            <h2 style="font-size: 2.2em; color: #6d4c67; margin-top: 0; text-align: center;">
+                Why Adopt a Cat?
+            </h2>
+            <div class="adoption-content">
+                <img src="https://images.unsplash.com/photo-1615678857339-4e7e51ce22db?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3V0ZSUyMGNhdCUyMHN0dXBpZHxlbnwwfHwwfHx8MA%3D%3D" alt="cat in a box">
+                <div class="benefits-list">
+                    <p><strong>Companionship</strong> - Cats provide unconditional love and endless entertainment</p>
+                    <p><strong>Health Benefits</strong> - Lower stress, blood pressure, and even reduce heart disease risk</p>
+                    <p><strong>Save a Life</strong> - Give a shelter cat the second chance they deserve</p>
+                    <button class="adopt-button">
+                        Find Your Purr-fect Match
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <p style="font-size: 1.2em;">All cats featured are from <a href="https://unsplash.com/s/photos/cute-cat" target="_blank">Unsplash</a> and represent adoptable cats worldwide</p>
+        <p>Made with ♡ & plenty of purrs for feline friends everywhere</p>
+        <p style="margin-top: 30px; font-size: 0.9em;">🐾 No cats were disturbed in the making of this website 🐾</p>
+    </footer>
+</body>
+</html>
